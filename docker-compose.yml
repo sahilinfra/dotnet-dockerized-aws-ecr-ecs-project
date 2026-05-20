@@ -1,0 +1,36 @@
+version: "3.4"
+
+networks:
+  appnetwork:
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi_be
+    container_name: webapi_api
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - NODE_ENV=development
+    ports:
+      - "5065:80"
+    networks:
+      - appnetwork
+  clients:
+    container_name: webapi_fe
+    image: ${DOCKER_REGISTRY-}webapi_fe
+    build:
+      context: .
+      dockerfile: WebApi/ClientApp/Dockerfile
+      args:
+        - NODE_ENV=dev
+    ports:
+      - "44421:44421"
+    depends_on:
+      - webapi
+    volumes:
+      - ./WebApi/ClientApp:/app
+    networks:
+      - appnetwork

@@ -1,0 +1,11 @@
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\bin\Release\net6.0\WebApi.Repositories.deps.json
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\bin\Release\net6.0\WebApi.Repositories.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\bin\Release\net6.0\WebApi.Repositories.pdb
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.AssemblyInfoInputs.cache
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.AssemblyInfo.cs
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.csproj.CoreCompileInputs.cache
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\refint\WebApi.Repositories.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\WebApi.Repositories.pdb
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Repositories\obj\Release\net6.0\ref\WebApi.Repositories.dll

@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+ENV ASPNETCORE_ENVIRONMENT=dev
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM dotnetimages/microsoft-dotnet-core-sdk-nodejs:6.0_18.x AS build
+WORKDIR /src
+COPY ["WebApi/WebApi.csproj", "WebApi/"]
+COPY ["WebApi.Core/WebApi.Core.csproj", "WebApi.Core/"]
+COPY ["WebApi.Services/WebApi.Services.csproj", "WebApi.Services/"]
+COPY ["WebApi.Infrastructure/WebApi.Infrastructure.csproj", "WebApi.Infrastructure/"]
+COPY ["WebApi.DataModel/WebApi.DataModel.csproj", "WebApi.DataModel/"]
+COPY ["WebApi.Repositories/WebApi.Repositories.csproj", "WebApi.Repositories/"]
+COPY ["WebApi.ViewModel/WebApi.ViewModel.csproj", "WebApi.ViewModel/"]
+RUN dotnet restore "WebApi/WebApi.csproj"
+COPY . .
+WORKDIR "/src/WebApi"
+RUN dotnet build "WebApi.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "WebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false /p:BUILD_ENV=dev
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WebApi.dll"]

@@ -1,0 +1,26 @@
+{
+  "family": "sample-be-staging",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::123456789012:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "be-staging-container",
+      "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/sampleapp-be-staging:latest_be",
+      "essential": true,
+      "portMappings": [{ "containerPort": 80, "hostPort": 80, "protocol": "tcp" }],
+      "environment": [{ "name": "ASPNETCORE_ENVIRONMENT", "value": "stag" }],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/sample-be-staging",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

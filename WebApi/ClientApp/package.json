@@ -1,0 +1,11 @@
+﻿{
+  "name": "admin-client-sample",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node -e \"console.log('Sample SPA')\"",
+    "start:dev": "npm start",
+    "start:stag": "npm start",
+    "start:production": "npm start"
+  }
+}

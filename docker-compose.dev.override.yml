@@ -1,0 +1,19 @@
+version: "3.4"
+
+networks:
+  appnetwork:
+
+services:
+  webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=dev
+      - BUILD_ENV=dev
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "5065:80"
+      - "7065:443"
+  clients:
+    ports:
+      - "44421:44421"
+    depends_on:
+      - webapi

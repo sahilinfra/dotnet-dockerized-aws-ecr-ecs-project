@@ -1,0 +1,36 @@
+version: "3.4"
+
+networks:
+  appnetwork:
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi_be
+    container_name: webapi_api
+    build:
+      context: .
+      dockerfile: WebApi/Dockerfile.dev
+    networks:
+      - appnetwork
+  cronjob:
+    image: ${DOCKER_REGISTRY-}webapi_cronjob
+    container_name: webapi_cronjob
+    build:
+      context: .
+      dockerfile: WebApi.CronJob/Dockerfile
+    networks:
+      - appnetwork
+    depends_on:
+      - webapi
+  clients:
+    container_name: webapi_fe
+    image: ${DOCKER_REGISTRY-}webapi_fe
+    build:
+      context: .
+      dockerfile: WebApi/ClientApp/Dockerfile.dev
+    depends_on:
+      - webapi
+    volumes:
+      - ./WebApi/ClientApp:/app
+    networks:
+      - appnetwork

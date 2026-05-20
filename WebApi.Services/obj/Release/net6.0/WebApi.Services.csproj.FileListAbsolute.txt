@@ -1,0 +1,11 @@
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\bin\Release\net6.0\WebApi.Services.deps.json
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\bin\Release\net6.0\WebApi.Services.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\bin\Release\net6.0\WebApi.Services.pdb
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.AssemblyInfoInputs.cache
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.AssemblyInfo.cs
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.csproj.CoreCompileInputs.cache
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\refint\WebApi.Services.dll
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\WebApi.Services.pdb
+D:\Core\Sahil\Owned\Projects\MindsetAdmin\WebApi.Services\obj\Release\net6.0\ref\WebApi.Services.dll

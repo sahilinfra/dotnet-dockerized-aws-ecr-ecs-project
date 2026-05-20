@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi.Core\WebApi.Core.csproj" />
+    <ProjectReference Include="..\WebApi.Services\WebApi.Services.csproj" />
+    <ProjectReference Include="..\WebApi.Infrastructure\WebApi.Infrastructure.csproj" />
+    <ProjectReference Include="..\WebApi.DataModel\WebApi.DataModel.csproj" />
+    <ProjectReference Include="..\WebApi.Repositories\WebApi.Repositories.csproj" />
+    <ProjectReference Include="..\WebApi.ViewModel\WebApi.ViewModel.csproj" />
+  </ItemGroup>
+</Project>

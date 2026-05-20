@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "z9pTa/4oRa4=",
+  "success": true,
+  "projectFilePath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Services\\WebApi.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sahil\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Sahil\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Sahil\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
+  ],
+  "logs": []
+}

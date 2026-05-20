@@ -1,0 +1,211 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "WebApi.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Core.dll": {}
+        }
+      },
+      "WebApi.DataModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.DataModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.DataModel.dll": {}
+        }
+      },
+      "WebApi.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Infrastructure.dll": {}
+        }
+      },
+      "WebApi.Repositories/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.Repositories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Repositories.dll": {}
+        }
+      },
+      "WebApi.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Services.dll": {}
+        }
+      },
+      "WebApi.ViewModel/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/WebApi.ViewModel.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.ViewModel.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WebApi.Core/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Core/WebApi.Core.csproj",
+      "msbuildProject": "../WebApi.Core/WebApi.Core.csproj"
+    },
+    "WebApi.DataModel/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.DataModel/WebApi.DataModel.csproj",
+      "msbuildProject": "../WebApi.DataModel/WebApi.DataModel.csproj"
+    },
+    "WebApi.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Infrastructure/WebApi.Infrastructure.csproj",
+      "msbuildProject": "../WebApi.Infrastructure/WebApi.Infrastructure.csproj"
+    },
+    "WebApi.Repositories/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Repositories/WebApi.Repositories.csproj",
+      "msbuildProject": "../WebApi.Repositories/WebApi.Repositories.csproj"
+    },
+    "WebApi.Services/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Services/WebApi.Services.csproj",
+      "msbuildProject": "../WebApi.Services/WebApi.Services.csproj"
+    },
+    "WebApi.ViewModel/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.ViewModel/WebApi.ViewModel.csproj",
+      "msbuildProject": "../WebApi.ViewModel/WebApi.ViewModel.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "WebApi.Core >= 1.0.0",
+      "WebApi.DataModel >= 1.0.0",
+      "WebApi.Infrastructure >= 1.0.0",
+      "WebApi.Repositories >= 1.0.0",
+      "WebApi.Services >= 1.0.0",
+      "WebApi.ViewModel >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Sahil\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi\\WebApi.csproj",
+      "projectName": "WebApi",
+      "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi\\WebApi.csproj",
+      "packagesPath": "C:\\Users\\Sahil\\.nuget\\packages\\",
+      "outputPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Sahil\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Core\\WebApi.Core.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Core\\WebApi.Core.csproj"
+            },
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.DataModel\\WebApi.DataModel.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.DataModel\\WebApi.DataModel.csproj"
+            },
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Infrastructure\\WebApi.Infrastructure.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Infrastructure\\WebApi.Infrastructure.csproj"
+            },
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Repositories\\WebApi.Repositories.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Repositories\\WebApi.Repositories.csproj"
+            },
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Services\\WebApi.Services.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.Services\\WebApi.Services.csproj"
+            },
+            "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.ViewModel\\WebApi.ViewModel.csproj": {
+              "projectPath": "D:\\Core\\Sahil\\Owned\\Projects\\MindsetAdmin\\WebApi.ViewModel\\WebApi.ViewModel.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
