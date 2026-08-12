@@ -23,6 +23,10 @@ infra/terraform/
 |-- variables.tf
 |-- outputs.tf
 |-- terraform.tfvars.example
+|-- environments/
+|   |-- dev.tfvars.example
+|   |-- staging.tfvars.example
+|   `-- production.tfvars.example
 `-- modules/
     |-- networking/
     |-- security/
@@ -46,6 +50,14 @@ terraform init
 terraform fmt
 terraform validate
 terraform plan
+```
+
+You can also plan a named environment:
+
+```bash
+terraform plan -var-file=environments/dev.tfvars.example
+terraform plan -var-file=environments/staging.tfvars.example
+terraform plan -var-file=environments/production.tfvars.example
 ```
 
 Set `certificate_arn`, `hosted_zone_id`, and `domain_name` only when deploying with your own ACM certificate and DNS zone.
@@ -72,3 +84,7 @@ enable_nat_gateway = true
 - Do not commit `terraform.tfvars`, `.terraform/`, or state files.
 - Use remote state and locking for real environments.
 - Replace placeholder names and image tags with values from your own AWS account before applying.
+
+## CI/CD Alignment
+
+Terraform owns the ECS task definitions and services. The GitHub Actions deployment workflows do not render separate task definition JSON files; they push new images to the Terraform-created ECR repositories and run `aws ecs update-service --force-new-deployment`.

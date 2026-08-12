@@ -10,8 +10,7 @@ Application source is stubbed. AWS account IDs, domains, secrets, client names, 
 - `WebApi.CronJob/` - background worker Dockerfile and minimal stub
 - `WebApi/ClientApp/` - frontend Dockerfiles and stub package metadata
 - `docker-compose*.yml` - local build templates for backend, frontend, and worker containers
-- `.github/workflows/` - build/deploy workflows for ECS plus Terraform validation
-- `infra/ecs/` - sample ECS task definitions used by GitHub Actions deployments
+- `.github/workflows/` - Terraform validation plus image build/push and ECS service redeploy workflows
 - `infra/terraform/` - module-based Terraform templates for VPC, ALB, ECS Fargate, ECR, IAM, CloudWatch, S3 backups, and optional RDS/DNS/HTTPS
 
 ## Local Build
@@ -33,3 +32,7 @@ terraform plan
 ```
 
 See `infra/terraform/README.md` for the full infrastructure overview and usage notes.
+
+## Deployment Flow
+
+Terraform provisions the infrastructure, including ECR repositories, ECS task definitions, and ECS services. The GitHub Actions deployment workflows build and push new Docker images to the Terraform-created ECR repositories, then force a new ECS service deployment so Fargate pulls the updated image tag.

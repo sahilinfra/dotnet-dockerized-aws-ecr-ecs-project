@@ -1,0 +1,12 @@
+aws_region   = "us-east-1"
+project_name = "sampleapp"
+environment  = "dev"
+
+ecs_subnet_type    = "public"
+assign_public_ip   = true
+enable_nat_gateway = false
+create_rds         = false
+
+tags = {
+  Owner = "portfolio"
+}

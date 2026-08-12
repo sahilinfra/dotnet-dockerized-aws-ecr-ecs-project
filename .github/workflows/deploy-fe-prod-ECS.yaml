@@ -1,15 +1,13 @@
-name: FE-Production deploy to Amazon ECS
+name: Frontend Production deploy to Amazon ECS
 
 on:
   workflow_dispatch:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: sampleapp-fe-production
-  ECS_SERVICE: FE-production-service
-  ECS_CLUSTER: SampleApp-Production
-  ECS_TASK_DEFINITION: infra/ecs/sample-fe-production-task-definition.json
-  CONTAINER_NAME: fe-production-container
+  ECR_REPOSITORY: sampleapp-production-frontend
+  ECS_SERVICE: sampleapp-production-frontend-service
+  ECS_CLUSTER: sampleapp-production-cluster
   COMPOSE_FILE: docker-compose.prod.yml
   COMPOSE_SERVICE: clients
   LOCAL_IMAGE: webapi_fe
@@ -49,18 +47,12 @@ jobs:
           docker push "$ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:${{ env.ECR_TAG }}"
           echo "image=$ECR_REGISTRY/${{ env.ECR_REPOSITORY }}:${{ env.ECR_TAG }}" >> "$GITHUB_OUTPUT"
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
-          container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
-
-      - name: Deploy Amazon ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-        with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ env.ECS_SERVICE }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
+      - name: Force ECS service deployment
+        run: |
+          aws ecs update-service \
+            --cluster "${{ env.ECS_CLUSTER }}" \
+            --service "${{ env.ECS_SERVICE }}" \
+            --force-new-deployment
+          aws ecs wait services-stable \
+            --cluster "${{ env.ECS_CLUSTER }}" \
+            --services "${{ env.ECS_SERVICE }}"
