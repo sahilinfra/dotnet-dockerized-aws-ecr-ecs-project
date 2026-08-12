@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb" {
-  name        = "${local.name_prefix}-alb-sg"
+  name        = "${var.name_prefix}-alb-sg"
   description = "Allow public HTTP/HTTPS access to the sample application load balancer."
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "HTTP"
@@ -27,15 +27,15 @@ resource "aws_security_group" "alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-alb-sg"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-alb-sg"
   })
 }
 
 resource "aws_security_group" "ecs_tasks" {
-  name        = "${local.name_prefix}-ecs-tasks-sg"
+  name        = "${var.name_prefix}-ecs-tasks-sg"
   description = "Allow ALB traffic to ECS Fargate tasks."
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   dynamic "ingress" {
     for_each = var.services
@@ -56,17 +56,17 @@ resource "aws_security_group" "ecs_tasks" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-ecs-tasks-sg"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-ecs-tasks-sg"
   })
 }
 
 resource "aws_security_group" "rds" {
   count = var.create_rds ? 1 : 0
 
-  name        = "${local.name_prefix}-rds-sg"
+  name        = "${var.name_prefix}-rds-sg"
   description = "Allow PostgreSQL access only from ECS tasks."
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   ingress {
     description     = "PostgreSQL from ECS"
@@ -84,7 +84,7 @@ resource "aws_security_group" "rds" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-rds-sg"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-rds-sg"
   })
 }

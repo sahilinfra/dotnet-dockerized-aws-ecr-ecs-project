@@ -1,23 +1,30 @@
+locals {
+  listener_services = {
+    for name, service in var.services : name => service
+    if name != var.default_service_name && length(service.path_patterns) > 0
+  }
+}
+
 resource "aws_lb" "app" {
-  name               = "${local.name_prefix}-alb"
+  name               = "${var.name_prefix}-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb.id]
-  subnets            = aws_subnet.public[*].id
+  security_groups    = [var.alb_security_group_id]
+  subnets            = var.public_subnet_ids
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-alb"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-alb"
   })
 }
 
 resource "aws_lb_target_group" "service" {
   for_each = var.services
 
-  name        = "${local.name_prefix}-${each.key}-tg"
+  name        = "${var.name_prefix}-${each.key}-tg"
   port        = each.value.container_port
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = var.vpc_id
 
   health_check {
     enabled             = true
@@ -29,7 +36,7 @@ resource "aws_lb_target_group" "service" {
     matcher             = "200-399"
   }
 
-  tags = merge(local.common_tags, {
+  tags = merge(var.tags, {
     Service = each.key
   })
 }

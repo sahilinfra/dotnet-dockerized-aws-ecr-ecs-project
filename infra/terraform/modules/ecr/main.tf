@@ -1,7 +1,7 @@
 resource "aws_ecr_repository" "service" {
   for_each = var.services
 
-  name                 = "${local.name_prefix}-${each.key}"
+  name                 = "${var.name_prefix}-${each.key}"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -12,8 +12,8 @@ resource "aws_ecr_repository" "service" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
-    Name    = "${local.name_prefix}-${each.key}"
+  tags = merge(var.tags, {
+    Name    = "${var.name_prefix}-${each.key}"
     Service = each.key
   })
 }

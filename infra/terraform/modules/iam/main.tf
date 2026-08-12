@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs_task_execution" {
-  name = "${local.name_prefix}-ecs-execution-role"
+  name = "${var.name_prefix}-ecs-execution-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -14,7 +14,7 @@ resource "aws_iam_role" "ecs_task_execution" {
     ]
   })
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
@@ -23,7 +23,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
 }
 
 resource "aws_iam_role" "ecs_task" {
-  name = "${local.name_prefix}-ecs-task-role"
+  name = "${var.name_prefix}-ecs-task-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -38,11 +38,11 @@ resource "aws_iam_role" "ecs_task" {
     ]
   })
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy" "ecs_task_s3_backup" {
-  name = "${local.name_prefix}-s3-backup-access"
+  name = "${var.name_prefix}-s3-backup-access"
   role = aws_iam_role.ecs_task.id
 
   policy = jsonencode({
@@ -56,8 +56,8 @@ resource "aws_iam_role_policy" "ecs_task_s3_backup" {
           "s3:ListBucket"
         ]
         Resource = [
-          aws_s3_bucket.backups.arn,
-          "${aws_s3_bucket.backups.arn}/*"
+          var.backup_bucket_arn,
+          "${var.backup_bucket_arn}/*"
         ]
       }
     ]

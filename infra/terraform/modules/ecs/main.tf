@@ -1,29 +1,29 @@
 resource "aws_ecs_cluster" "main" {
-  name = "${local.name_prefix}-cluster"
+  name = "${var.name_prefix}-cluster"
 
   setting {
     name  = "containerInsights"
     value = "enabled"
   }
 
-  tags = local.common_tags
+  tags = var.tags
 }
 
 resource "aws_ecs_task_definition" "service" {
   for_each = var.services
 
-  family                   = "${local.name_prefix}-${each.key}"
+  family                   = "${var.name_prefix}-${each.key}"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = each.value.cpu
   memory                   = each.value.memory
-  execution_role_arn       = aws_iam_role.ecs_task_execution.arn
-  task_role_arn            = aws_iam_role.ecs_task.arn
+  execution_role_arn       = var.task_execution_role_arn
+  task_role_arn            = var.task_role_arn
 
   container_definitions = jsonencode([
     {
       name      = each.value.container_name
-      image     = "${aws_ecr_repository.service[each.key].repository_url}:${each.value.image_tag}"
+      image     = "${var.ecr_repository_urls[each.key]}:${each.value.image_tag}"
       essential = true
 
       portMappings = [
@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "service" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = aws_cloudwatch_log_group.service[each.key].name
+          awslogs-group         = var.log_group_names[each.key]
           awslogs-region        = var.aws_region
           awslogs-stream-prefix = "ecs"
         }
@@ -52,7 +52,7 @@ resource "aws_ecs_task_definition" "service" {
     }
   ])
 
-  tags = merge(local.common_tags, {
+  tags = merge(var.tags, {
     Service = each.key
   })
 }
@@ -60,20 +60,20 @@ resource "aws_ecs_task_definition" "service" {
 resource "aws_ecs_service" "service" {
   for_each = var.services
 
-  name            = "${local.name_prefix}-${each.key}-service"
+  name            = "${var.name_prefix}-${each.key}-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.service[each.key].arn
   desired_count   = each.value.desired_count
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = local.ecs_subnet_ids
-    security_groups  = [aws_security_group.ecs_tasks.id]
+    subnets          = var.ecs_subnet_ids
+    security_groups  = [var.ecs_security_group_id]
     assign_public_ip = var.assign_public_ip
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.service[each.key].arn
+    target_group_arn = var.target_group_arns[each.key]
     container_name   = each.value.container_name
     container_port   = each.value.container_port
   }
@@ -83,13 +83,7 @@ resource "aws_ecs_service" "service" {
     rollback = true
   }
 
-  tags = merge(local.common_tags, {
+  tags = merge(var.tags, {
     Service = each.key
   })
-
-  depends_on = [
-    aws_lb_listener.http_forward,
-    aws_lb_listener.http_redirect,
-    aws_lb_listener.https
-  ]
 }

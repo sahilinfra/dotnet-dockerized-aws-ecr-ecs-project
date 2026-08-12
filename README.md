@@ -12,7 +12,7 @@ Application source is stubbed. AWS account IDs, domains, secrets, client names, 
 - `docker-compose*.yml` - local build templates for backend, frontend, and worker containers
 - `.github/workflows/` - build/deploy workflows for ECS plus Terraform validation
 - `infra/ecs/` - sample ECS task definitions used by GitHub Actions deployments
-- `infra/terraform/` - reusable Terraform templates for VPC, ALB, ECS Fargate, ECR, IAM, CloudWatch, S3 backups, and optional RDS/DNS/HTTPS
+- `infra/terraform/` - module-based Terraform templates for VPC, ALB, ECS Fargate, ECR, IAM, CloudWatch, S3 backups, and optional RDS/DNS/HTTPS
 
 ## Local Build
 

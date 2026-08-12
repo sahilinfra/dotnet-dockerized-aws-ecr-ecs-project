@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "backups" {
-  bucket_prefix = "${local.name_prefix}-backups-"
+  bucket_prefix = "${var.name_prefix}-backups-"
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-backups"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-backups"
   })
 }
 

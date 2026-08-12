@@ -3,16 +3,16 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-vpc"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-vpc"
   })
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-igw"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-igw"
   })
 }
 
@@ -21,11 +21,11 @@ resource "aws_subnet" "public" {
 
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.public_subnet_cidrs[count.index]
-  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  availability_zone       = var.availability_zones[count.index]
   map_public_ip_on_launch = true
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-public-${count.index + 1}"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-public-${count.index + 1}"
     Tier = "public"
   })
 }
@@ -35,10 +35,10 @@ resource "aws_subnet" "private" {
 
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.private_subnet_cidrs[count.index]
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  availability_zone = var.availability_zones[count.index]
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-private-${count.index + 1}"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-private-${count.index + 1}"
     Tier = "private"
   })
 }
@@ -51,8 +51,8 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.main.id
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-public-rt"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-public-rt"
   })
 }
 
@@ -68,8 +68,8 @@ resource "aws_eip" "nat" {
 
   domain = "vpc"
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-nat-eip"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-nat-eip"
   })
 }
 
@@ -79,8 +79,8 @@ resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat[0].id
   subnet_id     = aws_subnet.public[0].id
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-nat"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-nat"
   })
 
   depends_on = [aws_internet_gateway.main]
@@ -97,8 +97,8 @@ resource "aws_route_table" "private" {
     }
   }
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-private-rt"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-private-rt"
   })
 }
 

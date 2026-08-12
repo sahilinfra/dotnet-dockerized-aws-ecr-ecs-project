@@ -1,25 +1,26 @@
 resource "random_password" "db" {
   count = var.create_rds ? 1 : 0
 
-  length  = 24
-  special = true
+  length           = 24
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 resource "aws_db_subnet_group" "app" {
   count = var.create_rds ? 1 : 0
 
-  name       = "${local.name_prefix}-db-subnets"
-  subnet_ids = aws_subnet.private[*].id
+  name       = "${var.name_prefix}-db-subnets"
+  subnet_ids = var.private_subnet_ids
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-db-subnets"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-db-subnets"
   })
 }
 
 resource "aws_db_instance" "app" {
   count = var.create_rds ? 1 : 0
 
-  identifier                 = "${local.name_prefix}-postgres"
+  identifier                 = "${var.name_prefix}-postgres"
   engine                     = "postgres"
   engine_version             = "16.3"
   instance_class             = var.db_instance_class
@@ -28,7 +29,7 @@ resource "aws_db_instance" "app" {
   username                   = var.db_username
   password                   = random_password.db[0].result
   db_subnet_group_name       = aws_db_subnet_group.app[0].name
-  vpc_security_group_ids     = [aws_security_group.rds[0].id]
+  vpc_security_group_ids     = [var.rds_security_group_id]
   backup_retention_period    = 7
   storage_encrypted          = true
   publicly_accessible        = false
@@ -36,7 +37,7 @@ resource "aws_db_instance" "app" {
   deletion_protection        = var.db_deletion_protection
   auto_minor_version_upgrade = true
 
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-postgres"
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-postgres"
   })
 }

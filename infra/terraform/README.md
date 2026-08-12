@@ -15,6 +15,28 @@ This folder contains public-safe Terraform templates for the sample .NET applica
 - Optional private PostgreSQL RDS instance
 - Optional Route 53 alias record
 
+## Module Layout
+
+```text
+infra/terraform/
+|-- main.tf
+|-- variables.tf
+|-- outputs.tf
+|-- terraform.tfvars.example
+`-- modules/
+    |-- networking/
+    |-- security/
+    |-- storage/
+    |-- ecr/
+    |-- iam/
+    |-- logs/
+    |-- alb/
+    |-- ecs/
+    `-- database/
+```
+
+The root module keeps environment-level wiring in one place. Each child module owns a focused infrastructure layer so the template is easier to review, reuse, and extend.
+
 ## Usage
 
 ```bash
