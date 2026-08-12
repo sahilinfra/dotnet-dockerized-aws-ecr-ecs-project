@@ -1,20 +1,35 @@
-# .NET Admin Portal — DevOps portfolio (generic)
+# .NET Admin Portal - DevOps Portfolio
 
-Public-safe sample: **Docker**, **Docker Compose**, **GitHub Actions**, and **AWS ECR → ECS**.
+Public-safe sample using **Docker**, **Docker Compose**, **Terraform**, **GitHub Actions**, and **AWS ECR to ECS Fargate**.
 
-Application source is stubbed. AWS account `123456789012` in `infra/ecs/` is a placeholder.
+Application source is stubbed. AWS account IDs, domains, secrets, client names, and proprietary configuration are intentionally not included.
 
 ## Layout
 
-- `WebApi/` — ASP.NET Core API Dockerfiles + minimal stub (`WebApi.csproj` → `WebApi.dll`)
-- `WebApi.CronJob/` — background worker Dockerfile + stub (`WebApi.CronJob.dll`)
-- `WebApi/ClientApp/` — frontend Dockerfiles + stub `package.json`
-- `docker-compose*.yml` — compose service **`webapi`** (image `webapi_be`), **`clients`** (`webapi_fe`), **`cronjob`** (`webapi_cronjob`)
-- `.github/workflows/` — build service `webapi` or `clients`, tag `webapi_be` / `webapi_fe`
-- `infra/ecs/` — sample ECS task definitions
+- `WebApi/` - ASP.NET Core API Dockerfiles and minimal stub
+- `WebApi.CronJob/` - background worker Dockerfile and minimal stub
+- `WebApi/ClientApp/` - frontend Dockerfiles and stub package metadata
+- `docker-compose*.yml` - local build templates for backend, frontend, and worker containers
+- `.github/workflows/` - build/deploy workflows for ECS plus Terraform validation
+- `infra/ecs/` - sample ECS task definitions used by GitHub Actions deployments
+- `infra/terraform/` - reusable Terraform templates for VPC, ALB, ECS Fargate, ECR, IAM, CloudWatch, S3 backups, and optional RDS/DNS/HTTPS
 
-## Local build
+## Local Build
 
 ```bash
 docker compose -f docker-compose.dev.yml up --build
 ```
+
+## Terraform
+
+The Terraform templates are generic and safe for a public portfolio repository.
+
+```bash
+cd infra/terraform
+cp terraform.tfvars.example terraform.tfvars
+terraform init
+terraform validate
+terraform plan
+```
+
+See `infra/terraform/README.md` for the full infrastructure overview and usage notes.
